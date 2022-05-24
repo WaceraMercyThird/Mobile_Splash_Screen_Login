@@ -9,6 +9,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val intent = Intent(this, LogInActivity::class.java)
         startActivity(intent)
-        finish(
+        finish()
     }
 }
