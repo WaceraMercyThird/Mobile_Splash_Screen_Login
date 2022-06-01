@@ -3,5 +3,12 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="signup">Don\'t have an account? <u>Sign Up</u></string>
+    <string name="login">Already have an account? <u>Log In</u></string>
+    <string name="first_name">First Name</string>
+    <string name="second_name">Second Name</string>
+    <string name="email2">Email</string>
+    <string name="password2">Password</string>
+    <string name="conform_password">Conform Password</string>
+    <string name="sign_up">Sign Up</string>
 
 </resources>

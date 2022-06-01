@@ -36,7 +36,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPassword"
+        android:id="@+id/tilPassword2"
         android:layout_width="0dp"
         app:passwordToggleEnabled="true"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tilEmail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etPassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -64,14 +64,15 @@
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword2" />
 
     <TextView
         android:id="@+id/tvSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:text="@string/signup"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        tools:layout_editor_absoluteX="121dp" />
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
