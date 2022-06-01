@@ -65,7 +65,7 @@ class SignupActivity : AppCompatActivity() {
         }
 
         if (secondname.isBlank()){
-            tilSecondname.error = "Second name is required"
+            tilSecondname.error = "Second name is required."
         }
 
         if (email.isBlank()){
