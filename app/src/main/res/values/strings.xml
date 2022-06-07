@@ -10,5 +10,10 @@
     <string name="password2">Password</string>
     <string name="conform_password">Conform Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="plan">plan</string>
+    <string name="plann">Plan</string>
+    <string name="plan2">Plan</string>
+    <string name="track">Track</string>
+    <string name="profile">Profile</string>
 
 </resources>
