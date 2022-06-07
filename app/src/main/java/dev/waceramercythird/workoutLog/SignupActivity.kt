@@ -3,6 +3,7 @@ package dev.waceramercythird.workoutLog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -71,12 +72,18 @@ class SignupActivity : AppCompatActivity() {
         if (email.isBlank()){
             tilEmail2.error = "Email is required"
         }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            tilEmail2.error = "Email is invalid"
+        }
 
         if (password.isBlank()){
             tilPassword2.error = "Password is required"
         }
         if (Confpassword.isBlank()){
-            tilConfpassword.error = "Confirmation Password is required"
+            tilConfpassword.error = "Confirmation is required"
+        }
+        if (Confpassword!=password){
+            tilConfpassword.error = "invalid password"
         }
     }
 }
