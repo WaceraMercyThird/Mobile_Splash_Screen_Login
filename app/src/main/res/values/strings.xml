@@ -15,5 +15,8 @@
     <string name="plan2">Plan</string>
     <string name="track">Track</string>
     <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Profile">PROFILE FRAGMENT</string>
 
 </resources>

@@ -7,31 +7,26 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import dev.waceramercythird.workoutLog.databinding.ActivityLogInBinding
 
 class LogInActivity : AppCompatActivity() {
-    lateinit var tvSignUp: TextView
-    lateinit var etEmail: TextInputEditText
-    lateinit var etPassword: TextInputEditText
-    lateinit var tilEmail: TextInputLayout
-    lateinit var tilPassword: TextInputLayout
-    lateinit var btnLogin: Button
+    lateinit var binding: ActivityLogInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_log_in)
-        tvSignUp = findViewById(R.id.tvSignup)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword2)
-        btnLogin = findViewById(R.id.btnLogin)
-        tilEmail = findViewById(R.id.tilEmail)
-        tilPassword = findViewById(R.id.tilPassword2)
+        binding = ActivityLogInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        tvSignUp.setOnClickListener {
+
+      handleClick()
+    }
+    fun handleClick(){
+        binding.tvSignup.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
 
         }
 
-        btnLogin.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
 
@@ -39,15 +34,18 @@ class LogInActivity : AppCompatActivity() {
 
         }
     }
-        fun validateLogin(){
-            var email = etEmail.text.toString()
-            var password =etPassword.text.toString()
-            if (email.isBlank()){
-                tilEmail.error = "Email is required"
-            }
 
-            if (password.isBlank()){
-                tilPassword.error = "Password is required"
-            }
+    fun validateLogin(){
+        var email = binding.etEmail.text.toString()
+        var password =binding.etPassword2.text.toString()
+        if (email.isBlank()){
+            binding.tilEmail.error = "Email is required"
         }
+
+        if (password.isBlank()){
+            binding.tilPassword2.error = "Password is required"
+        }
+    }
+
+
     }
