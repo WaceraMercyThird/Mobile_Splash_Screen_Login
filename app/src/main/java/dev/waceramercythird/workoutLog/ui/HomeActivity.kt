@@ -1,9 +1,10 @@
-package dev.waceramercythird.workoutLog
+package dev.waceramercythird.workoutLog.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dev.waceramercythird.workoutLog.R
 
 class HomeActivity : AppCompatActivity() {
     lateinit var bnvHome: BottomNavigationView
@@ -24,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
     fun setupBottomNav(){
         bnvHome.setOnItemSelectedListener { item ->
             when(item.itemId){
-                R.id.page_1->{
+                R.id.page_1 ->{
                     supportFragmentManager.beginTransaction().replace(R.id.fcvHome, PlanFragment()).commit()
                     true
                 }
@@ -33,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
                     true
 
                 }
-                R.id.page_3->{
+                R.id.page_3 ->{
                     supportFragmentManager.beginTransaction().replace(R.id.fcvHome, ProfileFragment()).commit()
                     true
                 }
