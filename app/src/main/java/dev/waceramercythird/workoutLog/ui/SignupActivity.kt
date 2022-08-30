@@ -4,10 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import dev.waceramercythird.workoutLog.ApiClient
+import dev.waceramercythird.workoutLog.ApiInterface
 import dev.waceramercythird.workoutLog.databinding.ActivitySignupBinding
 import dev.waceramercythird.workoutLog.models.RegisterRequest
+import dev.waceramercythird.workoutLog.models.RegisterResponse
+import retrofit2.Call
+import retrofit2.Response
 
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
@@ -79,32 +84,43 @@ class SignupActivity : AppCompatActivity() {
             binding.tilConfpassword.error = "invalid password"
         }
         if (!error){
+            binding.progressBarRegister.visibility = View.VISIBLE
+        }
+
             var registerRequest = RegisterRequest(firstname,secondname,phonenumber,email, password)
-        }
+        makeRegisterationRequest(registerRequest)
     }
-    fun makeRegistrationRequest(registerRequest: RegisterRequest){
-        var apiClient = ApiClient.buildApiClient(ApiClient::class.java)
-        var request = apiClient.registerUser(registerRequest)
-
-        request.enqeue(Object : Callback<RegisterResponse>{
-//            onResponse
-//            if (response.isSuccessful){
-//                var message = response.body()?.message
-//                Toast.makeText(baseContext, massage, Toast.LENGTH_LONG).show()
-//                startActivity(Intent(baseContext.LoginActivity::class.java))
-//            }
-//            else {
-//                var error =response.Sstring()
-//                Toast.makeText(baseContext, error, Toast.LENGTH_LONG).show()
-//
-//
-////                onfailure
-//                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
-//            }
 
 
+    }
+fun makeRegisterationRequest(registerRequest: RegisterRequest){
+    var apiClient=ApiClient.buildApiClient(ApiInterface::class.java)
+    var request=apiClient.registerUser(registerRequest)
+
+    request.enqueue(object :retrofit2.Callback<RegisterResponse>{
+        override fun onResponse(
+            call: Call<RegisterResponse>,
+            response: Response<RegisterResponse>
+        ) {
+            if (response.isSuccessful){
+                var message=response.body()?.message
+                Toast.makeText(baseContext,message,Toast.LENGTH_LONG).show()
+
+            }else{
+                val error=response.errorBody()?.string()
+                Toast.makeText(baseContext,error,Toast.LENGTH_LONG).show()
+
+            }
         }
 
-//        })
-//    }
-}
+        override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+            Toast.makeText(baseContext,t.message,Toast.LENGTH_LONG).show()        }
+    })
+
+
+    }
+
+
+
+
+
