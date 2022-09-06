@@ -62,9 +62,10 @@ class LogInActivity : AppCompatActivity() {
         }
         if (!error) {
             var loginRequest = RegisterRequest2(email, password)
+            userViewModel.login(LogInRequest)
 
         }
-//        makeRegisterationRequest(LogInRequest)
+//
     }
 
     fun makeRegisterationRequest(loginRequest: LogInRequest) {
