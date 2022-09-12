@@ -2,6 +2,7 @@ package dev.waceramercythird.workoutLog
 
 import dev.waceramercythird.workoutLog.models.RegisterRequest
 import dev.waceramercythird.workoutLog.models.RegisterResponse
+import dev.waceramercythird.workoutLog.repository.UserRepository
 import dev.waceramercythird.workoutLog.ui.LogInRequest
 import retrofit2.Call
 import retrofit2.Response
@@ -16,7 +17,7 @@ interface ApiInterface {
     suspend fun loginUser(@Body loginRequest: LogInRequest): Response<LogInRequest>
 
     @POST("/signin")
-    suspend fun signinUser(@Body signinRequest: SignInRequest): Response<SignInRequest>
+    suspend fun signinUser(@Body signinRequest: UserRepository.SignInRequest): Response<UserRepository.SignInRequest>
 
 }
 
