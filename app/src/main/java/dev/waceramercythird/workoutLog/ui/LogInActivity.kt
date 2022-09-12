@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import dev.waceramercythird.workoutLog.ApiClient
 import dev.waceramercythird.workoutLog.ApiInterface
 import dev.waceramercythird.workoutLog.databinding.ActivityLogInBinding
 import dev.waceramercythird.workoutLog.models.RegisterRequest2
+import dev.waceramercythird.workoutLog.viewmodel.UserViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +20,10 @@ import retrofit2.Response
 class LogInActivity : AppCompatActivity() {
     lateinit var binding: ActivityLogInBinding
     lateinit var sharedPrefs: SharedPreferences
+
+    val userViewModel:UserViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLogInBinding.inflate(layoutInflater)
@@ -42,6 +49,22 @@ class LogInActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        userViewModel.loginLiveData.observe(this, Observer {
+                loginResponse->
+            Toast.makeText(baseContext, loginResponse?.message, Toast.LENGTH_LONG).show()
+            persistLoginDetails(loginResponse!!)
+            startActivity(Intent(baseContext, HomeActivity::class.java))
+        })
+
+        userViewModel.loginError.observe(this, Observer { errorMsg->
+            Toast.makeText(baseContext, str, Toast.LENGTH_LONG).show()
+
+        })
+    }
+}
     fun validateLogin() {
         var email = binding.etEmail.text.toString()
         var password = binding.etPassword2.text.toString()

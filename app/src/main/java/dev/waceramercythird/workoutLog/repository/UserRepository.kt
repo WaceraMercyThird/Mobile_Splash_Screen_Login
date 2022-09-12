@@ -7,15 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-//class UserRepository {
-//    val apiClient = ApiClient.buildApiClient(ApiInterface::class.java)
-//
-//    suspend fun loginuser(logInRequest: LogInRequest) Response<LoginResponse>
-//    = withContext(Dispatcher.IO) {
-//        val response = apiClient.loginUser(loginResponse)
-//        return@withContext response
-//    }
-//}
 
 class UserRepository {
     val apiClient = ApiClient.buildApiClient(ApiInterface::class.java)
@@ -23,7 +14,17 @@ class UserRepository {
     suspend fun loginUser(logInRequest: LogInRequest):
             Response<LogInRequest> =
         withContext(Dispatchers.IO) {
-            var response = apiClient.registerStudent(logInRequest)
+            var response = apiClient.loginUser(logInRequest)
             return@withContext response
         }
+    suspend fun signinUser(signInRequest: SignInRequest):
+            Response<SignInRequest> =
+        withContext(Dispatchers.IO) {
+            var response = apiClient.signinUser(signInRequest)
+            return@withContext response
+        }
+
+    class SignInRequest {
+
+    }
 }

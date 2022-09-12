@@ -13,7 +13,11 @@ interface ApiInterface {
     fun registerUser(@Body registerRequest: LogInRequest): Call<RegisterResponse>
 
     @POST("/login")
-    fun loginUser(@Body loginRequest: LogInRequest): Response<LogInRequest>
+    suspend fun loginUser(@Body loginRequest: LogInRequest): Response<LogInRequest>
+
+    @POST("/signin")
+    suspend fun signinUser(@Body signinRequest: SignInRequest): Response<SignInRequest>
+
 }
 
 

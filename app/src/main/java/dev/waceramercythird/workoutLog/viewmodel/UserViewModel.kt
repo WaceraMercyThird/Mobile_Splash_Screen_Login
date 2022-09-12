@@ -10,6 +10,8 @@ class UserViewModel: ViewModel() {
     val userRepository = UserRepository()
     val loginLiveData = MutableLiveData<LogInResponse>()
     val loginError = MutableLiveData<String>()
+    val signinLiveData = MutableLiveData<SignInResponse>()
+    val signinError = MutableLiveData<String>()
 
 
     fun login(logInRequest: LogInRequest) {
@@ -19,10 +21,23 @@ class UserViewModel: ViewModel() {
                 loginLiveData.postValue(response.body())
             }
             else{
-                loginError.postValue(response.errorBody()?.String())
+                loginError.postValue(response.errorBody()?.string())
             }
         }
     }
+    fun signin(signInRequest: UserRepository.SignInRequest) {
+        viewModelScope.launch {
+            val response = userRepository.signinUser(signInRequest)
+            if (response.isSuccessful){
+                loginLiveData.postValue(response.body())
+            }
+            else{
+                loginError.postValue(response.errorBody()?.string())
+            }
+        }
+    }
+
+//    concurrency and Parallesism??
 
 
 }

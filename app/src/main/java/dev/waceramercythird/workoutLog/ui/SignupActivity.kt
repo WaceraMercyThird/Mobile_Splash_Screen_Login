@@ -1,25 +1,36 @@
 package dev.waceramercythird.workoutLog.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import dev.waceramercythird.workoutLog.ApiClient
 import dev.waceramercythird.workoutLog.ApiInterface
 import dev.waceramercythird.workoutLog.databinding.ActivitySignupBinding
 import dev.waceramercythird.workoutLog.models.RegisterRequest
 import dev.waceramercythird.workoutLog.models.RegisterResponse
+import dev.waceramercythird.workoutLog.repository.UserRepository
+import dev.waceramercythird.workoutLog.viewmodel.UserViewModel
 import retrofit2.Call
 import retrofit2.Response
 
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
+    lateinit var sharedPrefs: SharedPreferences
+
+
+    val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedPrefs = getSharedPreferences("WORKOUTlOG_PREFS", MODE_PRIVATE)
+
 
         handleclick()
     }
@@ -37,6 +48,20 @@ class SignupActivity : AppCompatActivity() {
             validateRegitration()
 
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        userViewModel.signinLiveData.observe(this, Observer {
+                signinResponse->
+            Toast.makeText(baseContext, signinResponse?.message, Toast.LENGTH_LONG).show()
+            persistLoginDetails(signinResponse!!)
+            startActivity(Intent(baseContext, HomeActivity::class.java))
+        })
+
+        userViewModel.loginError.observe(this, Observer { errorMsg->
+            Toast.makeText(baseContext, str, Toast.LENGTH_LONG).show()
+
+        })
     }
     fun validateRegitration(){
         var firstname = binding.etFirstname.text.toString()
@@ -85,10 +110,12 @@ class SignupActivity : AppCompatActivity() {
         }
         if (!error){
             binding.progressBarRegister.visibility = View.VISIBLE
+            userViewModel.signin(UserRepository.SignInRequest)
+
         }
 
-            var registerRequest = RegisterRequest(firstname,secondname,phonenumber,email, password)
-        makeRegisterationRequest(registerRequest)
+//            var registerRequest = RegisterRequest(firstname,secondname,phonenumber,email, password)
+//        makeRegisterationRequest(registerRequest)
     }
 
 
