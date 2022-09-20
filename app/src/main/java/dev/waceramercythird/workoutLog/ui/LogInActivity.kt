@@ -87,6 +87,7 @@ class LogInActivity : AppCompatActivity() {
             var loginRequest = RegisterRequest2(email, password)
             userViewModel.login(LogInRequest)
 
+
         }
 //
     }
@@ -119,8 +120,10 @@ class LogInActivity : AppCompatActivity() {
 
         })
     }
-    fun persistLoginDetails(logInResponse: LogInResponse){
+    fun persistLoginDetails(logInResp    lateinit var  sharePrefs
+onse: LogInResponse){
         var editor = sharedPrefs.edit()
+        var token  = "Bearer ${logInResponse.accessToken}"
         editor.putString("USER_ID", logInResponse.userId)
         editor.putString("ACCESS_TOKEN", logInResponse.accessToken)
         editor.putString("PROFILE_ID", logInResponse.profileId)

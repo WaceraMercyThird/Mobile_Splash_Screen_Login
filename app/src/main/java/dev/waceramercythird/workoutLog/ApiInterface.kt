@@ -7,6 +7,7 @@ import dev.waceramercythird.workoutLog.ui.LogInRequest
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiInterface {
@@ -18,7 +19,8 @@ interface ApiInterface {
 
     @POST("/signin")
     suspend fun signinUser(@Body signinRequest: UserRepository.SignInRequest): Response<UserRepository.SignInRequest>
-
+    @POST("GET /exercise-categories")
+    suspend fun fetchExerciseCategories(@Header("Authorization")token: String): Response<List<ExerciseCategory>>
 }
 
 
